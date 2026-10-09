@@ -259,7 +259,7 @@ export function Notebook() {
         )}
         {transfer.state.kind === "imported" && (
           <p role="status" className="text-sm text-muted-foreground">
-            Imported: {transfer.result.added} {transfer.result.added === 1 ? "row" : "rows"} added.
+            Imported: {transfer.result.rows} {transfer.result.rows === 1 ? "row" : "rows"} added.
           </p>
         )}
       </footer>
