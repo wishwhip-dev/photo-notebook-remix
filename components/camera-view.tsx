@@ -28,6 +28,12 @@ import {
 type CameraViewProps = {
   /** Which camera to open first. Default `"user"` (the selfie camera). */
   facing?: CameraFacing;
+  /**
+   * Open as soon as the component mounts. For a flow where the visitor has just clicked a button
+   * that leads here — that click is the gesture that asks for the camera. Never set this on a
+   * component that renders on load.
+   */
+  autoOpen?: boolean;
   /** Receives each photo taken. Store the Blob (IndexedDB keeps Blobs) or turn it into a data URL. */
   onPhoto?: (photo: Blob) => void;
   /** Passed to `capturePhoto`: type, quality, maxEdge. */
@@ -65,7 +71,7 @@ function isMirrored(stream: MediaStream, requested: CameraFacing): boolean {
   return requested === "user";
 }
 
-export function CameraView({ facing = "user", onPhoto, photoOptions, className }: CameraViewProps) {
+export function CameraView({ facing = "user", autoOpen = false, onPhoto, photoOptions, className }: CameraViewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const aliveRef = useRef(true);
   const [state, setState] = useState<ViewState>({ kind: "off" });
@@ -81,6 +87,18 @@ export function CameraView({ facing = "user", onPhoto, photoOptions, className }
       aliveRef.current = false;
     };
   }, []);
+
+  // Opened from the visitor's click that mounted this view. The timer keeps the state changes
+  // inside a callback, where they belong to an effect, and lets the first render finish.
+  const openedRef = useRef(false);
+  useEffect(() => {
+    if (!autoOpen || openedRef.current) return;
+    openedRef.current = true;
+    const timer = window.setTimeout(() => void open(), 0);
+    return () => window.clearTimeout(timer);
+    // `open` reads state (`facing`) that does not change for the life of this mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoOpen]);
 
   // Everything tied to one live stream: showing it, stopping it when the tab is hidden or the camera
   // disappears, and stopping it on the way out. The cleanup runs when the stream is replaced, when
