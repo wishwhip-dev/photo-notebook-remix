@@ -100,7 +100,7 @@ export function PhotoCard({
             }
           />
         ) : (
-          <Button type="button" variant="outline" size="sm" className="justify-start" disabled={busy} onClick={() => setEditing(true)}>
+          <Button type="button" variant="outline" className="h-11" disabled={busy} onClick={() => setEditing(true)}>
             <Pencil aria-hidden className="size-4" />
             Edit caption
           </Button>
