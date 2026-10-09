@@ -119,7 +119,7 @@ export function PhotoCard({
             disabled={busy}
             aria-label={`Delete photo ${photo.name}`}
             onClick={() => setConfirming(true)}
-            className="h-10 px-2 text-sm text-destructive hover:text-destructive"
+            className="h-11 px-2 text-sm text-destructive hover:text-destructive"
           >
             <X aria-hidden className="size-4" />
             Delete photo
