@@ -71,7 +71,7 @@ function isMirrored(stream: MediaStream, requested: CameraFacing): boolean {
   return requested === "user";
 }
 
-export function CameraView({ facing = "user", onPhoto, photoOptions, className }: CameraViewProps) {
+export function CameraView({ facing = "user", autoOpen = false, onPhoto, photoOptions, className }: CameraViewProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const aliveRef = useRef(true);
   const [state, setState] = useState<ViewState>({ kind: "off" });
