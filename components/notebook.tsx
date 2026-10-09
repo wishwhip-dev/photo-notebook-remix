@@ -236,7 +236,7 @@ export function Notebook() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Button type="button" variant="outline" onClick={() => void exportToFile()} disabled={transfer.state.kind === "working"}>
+          <Button type="button" variant="outline" onClick={() => void exportToFile()} disabled={transfer.kind === "working"}>
             Export notebook
           </Button>
         </div>
