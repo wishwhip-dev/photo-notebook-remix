@@ -249,12 +249,12 @@ export function Notebook() {
         >
           or drop a notebook export here — it replaces everything in this notebook
         </FileDrop>
-        {transfer.state.kind === "error" && (
+        {transfer.kind === "error" && (
           <p role="alert" className="text-sm text-destructive">
-            {transfer.state.message}
+            {transfer.message}
           </p>
         )}
-        {transfer.state.kind === "imported" && (
+        {transfer.kind === "imported" && (
           <p role="status" className="text-sm text-muted-foreground">
             Imported: {transfer.result.rows} {transfer.result.rows === 1 ? "row" : "rows"} added.
           </p>
