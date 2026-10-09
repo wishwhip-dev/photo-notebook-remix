@@ -201,10 +201,10 @@ function CaptionForm({
         autoFocus
       />
       <div className="flex gap-2">
-        <Button type="submit" size="sm" disabled={busy}>
+        <Button type="submit" size="sm" disabled={busy} className="h-10">
           Save caption
         </Button>
-        <Button type="button" variant="ghost" size="sm" disabled={busy} onClick={onCancel} className="h-9">
+        <Button type="button" variant="ghost" size="sm" disabled={busy} onClick={onCancel} className="h-10">
           Cancel
         </Button>
       </div>
