@@ -96,12 +96,9 @@ export function Notebook() {
   async function handleImport(files: File[]) {
     const file = files[0];
     if (!file) return;
+    // The outcome is shown by the error / imported paragraphs below — `transfer.state` in this
+    // closure is already stale by the time the promise resolves.
     await importFromFile(file, "replace");
-    if (transfer.state.kind === "error") {
-      setFileError(transfer.state.message);
-    } else {
-      toast.success("Notebook imported");
-    }
   }
 
   return (
