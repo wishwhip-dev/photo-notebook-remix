@@ -55,7 +55,7 @@ export function StarRating({
           size="sm"
           disabled={disabled}
           onClick={() => onChange(0)}
-          className="h-10 shrink-0 px-2 text-sm text-muted-foreground"
+          className="h-11 shrink-0 px-2 text-sm text-muted-foreground"
         >
           Clear
         </Button>
