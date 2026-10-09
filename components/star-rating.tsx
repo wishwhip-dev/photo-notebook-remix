@@ -38,7 +38,7 @@ export function StarRating({
               aria-label={clears ? `Clear the ${n}-star rating` : `Rate ${n} star${n > 1 ? "s" : ""}`}
               title={clears ? "Clear rating" : `Rate ${n} of 5`}
               onClick={() => onChange(clears ? 0 : n)}
-              className="size-10 rounded-full hover:bg-accent"
+              className="size-11 rounded-full hover:bg-accent"
             >
               <Star
                 aria-hidden
