@@ -88,6 +88,18 @@ export function CameraView({ facing = "user", autoOpen = false, onPhoto, photoOp
     };
   }, []);
 
+  // Opened from the visitor's click that mounted this view. The timer keeps the state changes
+  // inside a callback, where they belong to an effect, and lets the first render finish.
+  const openedRef = useRef(false);
+  useEffect(() => {
+    if (!autoOpen || openedRef.current) return;
+    openedRef.current = true;
+    const timer = window.setTimeout(() => void open(), 0);
+    return () => window.clearTimeout(timer);
+    // `open` reads state (`facing`) that does not change for the life of this mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoOpen]);
+
   // Everything tied to one live stream: showing it, stopping it when the tab is hidden or the camera
   // disappears, and stopping it on the way out. The cleanup runs when the stream is replaced, when
   // the state leaves "on" (Stop camera, a hidden tab) and on unmount, so tracks are never left live.
