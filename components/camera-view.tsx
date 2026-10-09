@@ -28,6 +28,12 @@ import {
 type CameraViewProps = {
   /** Which camera to open first. Default `"user"` (the selfie camera). */
   facing?: CameraFacing;
+  /**
+   * Open as soon as the component mounts. For a flow where the visitor has just clicked a button
+   * that leads here — that click is the gesture that asks for the camera. Never set this on a
+   * component that renders on load.
+   */
+  autoOpen?: boolean;
   /** Receives each photo taken. Store the Blob (IndexedDB keeps Blobs) or turn it into a data URL. */
   onPhoto?: (photo: Blob) => void;
   /** Passed to `capturePhoto`: type, quality, maxEdge. */
